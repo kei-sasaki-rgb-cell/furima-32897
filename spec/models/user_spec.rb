@@ -10,30 +10,30 @@ RSpec.describe User, type: :model do
       @user = FactoryBot.build(:user)
       @user.nickname = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include ("Nickname can't be blank")
+      expect(@user.errors.full_messages).to include("Nickname can't be blank")
     end
     it 'emailが空では登録できない' do
       @user.email = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include ("Email can't be blank")
+      expect(@user.errors.full_messages).to include("Email can't be blank")
     end
     it 'メールアドレスが一意性（重複してはならない）であること' do
       @user.save
       another_user = FactoryBot.build(:user)
       another_user.email = @user.email
       another_user.valid?
-      #binding.pry
-      expect(another_user.errors.full_messages).to include ('Email has already been taken')
+      # binding.pry
+      expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
     it 'メールアドレスは、@を含めないと登録できない' do
       @user.email = '@'
       @user.valid?
-      expect(@user.errors.full_messages).to include ('Email is invalid')
+      expect(@user.errors.full_messages).to include('Email is invalid')
     end
     it 'パスワードが必須であること' do
       @user.password = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include ("Password can't be blank")
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
     it 'パスワードは、6文字以上での入力が必須であること' do
       @user.password = '000a00'
@@ -63,7 +63,7 @@ RSpec.describe User, type: :model do
       @user.last_name = ''
       @user.first_name = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include ("Last name can't be blank"), ('Last name is invalid')
+      expect(@user.errors.full_messages).to include "Last name can't be blank", 'Last name is invalid'
     end
     it 'ユーザー本名は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
       @user = FactoryBot.build(:user)
@@ -77,7 +77,8 @@ RSpec.describe User, type: :model do
       @user.last_name_kana = ''
       @user.first_name_kana = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include ("Last name kana can't be blank"),('Last name kana is invalid'),("First name kana can't be blank"),('First name kana is invalid')
+      expect(@user.errors.full_messages).to include "Last name kana can't be blank", 'Last name kana is invalid',
+                                                    "First name kana can't be blank", 'First name kana is invalid'
     end
     it 'ユーザー本名のフリガナは、全角（カタカナ）での入力が必須であること' do
       @user = FactoryBot.build(:user)
@@ -90,7 +91,7 @@ RSpec.describe User, type: :model do
       @user = FactoryBot.build(:user)
       @user.birthday = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include ("Birthday can't be blank")
+      expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
 end
