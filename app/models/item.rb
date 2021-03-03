@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_date
 
-  #空の投稿を保存できないようにする
+  # 空の投稿を保存できないようにする
   with_options presence: true do
     validates :image
     validates :name
@@ -21,9 +21,10 @@ class Item < ApplicationRecord
     validates :shipping_date_id
 
     VALID_PRICE_REGEX = /\A[0-9]+\z/
-    validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}, format: { with: VALID_PRICE_REGEX}
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
+                      format: { with: VALID_PRICE_REGEX }
   end
 
-  #選択が「--」の時は保存できないようにする
+  # 選択が「--」の時は保存できないようにする
   validates :category_id, :state_id, :postage_id, :prefecture_id, :shipping_date_id, numericality: { other_than: 1 }
 end
