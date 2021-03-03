@@ -20,7 +20,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :shipping_date_id
 
-    validates :price
+    validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   end
 
   #選択が「--」の時は保存できないようにする
