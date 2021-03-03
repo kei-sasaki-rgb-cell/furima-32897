@@ -14,6 +14,12 @@ class Item < ApplicationRecord
     validates :name
     validates :description
 
+    validates :category_id
+    validates :state_id
+    validates :postage_id
+    validates :prefecture_id
+    validates :shipping_date_id
+
     VALID_PRICE_REGEX = /\A[0-9]+\z/
     validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}, format: { with: VALID_PRICE_REGEX}
   end
