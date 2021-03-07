@@ -23,7 +23,7 @@
       </span>
     </div>
 
-  <% if user_signed_in? && @item %>
+  <% if user_signed_in? %>
     <% if current_user.id == @item.user_id %>
         <%= link_to "商品の編集", item_path(@item), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
@@ -37,7 +37,7 @@
 
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @item.description %></span>
     </div>
     <table class="detail-table">
       <tbody>
