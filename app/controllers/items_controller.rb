@@ -18,6 +18,14 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+
+    #@form_obj = FormObj.new(obj_params)
+      #if @form_obj.valid?
+        #@form_obj.save
+        #redirect_to action: :index
+      #else
+        #render action: :new
+      #end
   end
 
   def show
@@ -53,4 +61,5 @@ class ItemsController < ApplicationController
   def redirect_user
     redirect_to root_path unless current_user == @item.user
   end
+
 end
