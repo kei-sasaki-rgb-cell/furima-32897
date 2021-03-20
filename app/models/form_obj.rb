@@ -11,6 +11,8 @@ class FormObj
     validates :phone_number, format: { with: /\A\d{11}\z/ }
   end
 
+  validates :prefecture_id, numericality: { other_than: 1 }
+
   def save
     # 各テーブルにデータを保存する処理を書く
     buyer = Buyer.create!(user_id: user_id, item_id: item_id)
