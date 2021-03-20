@@ -2,18 +2,22 @@ class BuyersController < ApplicationController
   
   def index
     @form_obj = FormObj.new
-    #@item = Item.find(params[:id])
     @item = Item.find(params[:item_id])
   end
 
   def create
-    binding.pry
+    @form_obj = FormObj.new(obj_params)
+    if @form_obj.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
 
-  #def obj_params
-    #params.require(:form_obj).permit(:user, :item, :postcode, :prefecture, :city, :block, :building, :phone_number)
-  #end
+  def obj_params
+    params.require(:form_obj).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number, :buyer_id).merge(user_id: current_user.id, item_id: params[:item_id])
+  end
 
 end

@@ -1,11 +1,11 @@
 class FormObj
   include ActiveModel::Model
-  attr_accessor :user, :item, :postcode, :prefecture, :city, :block, :building, :phone_number, :buyer
+  attr_accessor :user_id, :item_id, :postcode, :prefecture_id, :city, :block, :building, :phone_number, :buyer_id #コントローラーから受け取る側
 
   # ここにバリデーションの処理を書く
   with_options presence: true do
     validates :postcode, format: { with: /\A\d{3}[-]\d{4}\z/ }
-    validates :prefecture
+    validates :prefecture_id
     validates :city
     validates :block
     validates :phone_number, format: { with: /\A\d{11}\z/ }
@@ -13,7 +13,7 @@ class FormObj
 
   def save
     # 各テーブルにデータを保存する処理を書く
-    buyer = Buyer.create(user: user, item: item)
-    Ship.create(postcode: postcode, prefecture: prefecture, city: city, block: block, building: building, phone_number: phone_number, buyer_id: buyer.id)
+    buyer = Buyer.create!(user_id: user_id, item_id: item_id)
+    Ship.create!(postcode: postcode, prefecture_id: prefecture_id, city: city, block: block, building: building, phone_number: phone_number, buyer_id: buyer.id)
   end
 end
