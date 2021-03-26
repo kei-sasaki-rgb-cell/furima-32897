@@ -4,7 +4,7 @@ class BuyersController < ApplicationController
   def index
     @form_obj = FormObj.new
     @item = Item.find(params[:item_id])
-    redirect_to root_path if @item.buyer.present?
+    redirect_to root_path if (current_user == @item.user) || @item.buyer.present?
   end
 
   def create
