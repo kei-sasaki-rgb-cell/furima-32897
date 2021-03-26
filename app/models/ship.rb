@@ -3,7 +3,7 @@ class Ship < ApplicationRecord
 
   # ここにバリデーションの処理を書く
   with_options presence: true do
-    validates :postcode, format: { with: /\A\d{3}[-]\d{4}\z/ }
+    validates :postcode, format: { with: /\A\d{3}-\d{4}\z/ }
     validates :prefecture_id
     validates :city
     validates :block

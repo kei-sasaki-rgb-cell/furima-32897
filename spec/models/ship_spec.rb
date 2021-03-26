@@ -13,7 +13,7 @@ RSpec.describe Ship, type: :model do
     end
 
     context '商品が購入できない場合' do
-      it '郵便番号がなければ購入できない'do
+      it '郵便番号がなければ購入できない' do
         @ship.postcode = nil
         @ship.valid?
         expect(@ship.errors.full_messages).to include("Postcode can't be blank")
@@ -21,7 +21,7 @@ RSpec.describe Ship, type: :model do
       it '郵便番号にはハイフンがないと購入できない' do
         @ship.postcode = '0000000'
         @ship.valid?
-        expect(@ship.errors.full_messages).to include("Postcode is invalid")
+        expect(@ship.errors.full_messages).to include('Postcode is invalid')
       end
       it '発送元の地域の選択をしていなければ購入できない' do
         @ship.prefecture_id = 1
@@ -46,12 +46,12 @@ RSpec.describe Ship, type: :model do
       it '電話番号にハイフンなしでなければ購入できない' do
         @ship.phone_number = '-'
         @ship.valid?
-        expect(@ship.errors.full_messages).to include("Phone number is invalid")
+        expect(@ship.errors.full_messages).to include('Phone number is invalid')
       end
       it '電話番号が11桁以内でないと購入できない' do
         @ship.phone_number = '0000000000'
         @ship.valid?
-        expect(@ship.errors.full_messages).to include("Phone number is invalid")
+        expect(@ship.errors.full_messages).to include('Phone number is invalid')
       end
     end
   end

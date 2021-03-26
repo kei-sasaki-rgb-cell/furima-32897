@@ -5,5 +5,5 @@ RSpec.describe Buyer, type: :model do
     @buyer = FactoryBot.build(:buyer)
   end
 
-  describe 
+  describe
 end

@@ -13,7 +13,7 @@ RSpec.describe FormObj, type: :model do
     end
 
     context '商品が購入できない場合' do
-      it '郵便番号がなければ購入できない'do
+      it '郵便番号がなければ購入できない' do
         @form_obj.postcode = nil
         @form_obj.valid?
         expect(@form_obj.errors.full_messages).to include("Postcode can't be blank")
@@ -21,7 +21,7 @@ RSpec.describe FormObj, type: :model do
       it '郵便番号にはハイフンがないと購入できない' do
         @form_obj.postcode = '0000000'
         @form_obj.valid?
-        expect(@form_obj.errors.full_messages).to include("Postcode is invalid")
+        expect(@form_obj.errors.full_messages).to include('Postcode is invalid')
       end
       it '発送元の地域の選択をしていなければ購入できない' do
         @form_obj.prefecture_id = 1
@@ -46,14 +46,14 @@ RSpec.describe FormObj, type: :model do
       it '電話番号にハイフンなしでなければ購入できない' do
         @form_obj.phone_number = '-'
         @form_obj.valid?
-        expect(@form_obj.errors.full_messages).to include("Phone number is invalid")
+        expect(@form_obj.errors.full_messages).to include('Phone number is invalid')
       end
       it '電話番号が11桁以内でないと購入できない' do
         @form_obj.phone_number = '0000000000'
         @form_obj.valid?
-        expect(@form_obj.errors.full_messages).to include("Phone number is invalid")
+        expect(@form_obj.errors.full_messages).to include('Phone number is invalid')
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @form_obj.token = nil
         @form_obj.valid?
         expect(@form_obj.errors.full_messages).to include("Token can't be blank")
