@@ -4,6 +4,8 @@ class FormObj
 
   # ここにバリデーションの処理を書く
   with_options presence: true do
+    validates :user_id
+    validates :item_id
     validates :postcode, format: { with: /\A\d{3}-\d{4}\z/ }
     validates :prefecture_id
     validates :city

@@ -1,14 +1,13 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
 
   def index
     @form_obj = FormObj.new
-    @item = Item.find(params[:item_id])
     redirect_to root_path if (current_user == @item.user) || @item.buyer.present?
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @form_obj = FormObj.new(obj_params)
     if @form_obj.valid?
       pay_item
@@ -28,11 +27,16 @@ class BuyersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY'] # 自身のPAY.JPテスト秘密鍵を記述
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: obj_params[:token],
       currency: 'jpy'
     )
   end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 end
