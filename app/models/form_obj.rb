@@ -10,7 +10,7 @@ class FormObj
     validates :prefecture_id
     validates :city
     validates :block
-    validates :phone_number, format: { with: /\A\d{11}\z/ }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/ }
     validates :token
   end
 

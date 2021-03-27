@@ -56,12 +56,12 @@ RSpec.describe FormObj, type: :model do
         expect(@form_obj.errors.full_messages).to include("Phone number is invalid")
       end
       it '電話番号にハイフンなしでなければ購入できない' do
-        @form_obj.phone_number = '-'
+        @form_obj.phone_number = '000-0000-0000'
         @form_obj.valid?
         expect(@form_obj.errors.full_messages).to include('Phone number is invalid')
       end
       it '電話番号が11桁以内でないと購入できない' do
-        @form_obj.phone_number = '0000000000'
+        @form_obj.phone_number = '000000000'
         @form_obj.valid?
         expect(@form_obj.errors.full_messages).to include('Phone number is invalid')
       end
