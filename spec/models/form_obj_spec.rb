@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe FormObj, type: :model do
   before do
-    @form_obj = FactoryBot.build(:form_obj)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @form_obj = FactoryBot.build(:form_obj, user_id: @user.id, item_id: @item.id)
+    sleep 1
   end
 
   describe '商品購入情報' do
@@ -12,8 +15,7 @@ RSpec.describe FormObj, type: :model do
       end
       it '建物名がなくても購入できる' do
         @form_obj.building = nil
-        @form_obj.valid?
-        expect(@form_obj.errors.full_messages).to include()
+        expect(@form_obj).to be_valid
       end
     end
 
