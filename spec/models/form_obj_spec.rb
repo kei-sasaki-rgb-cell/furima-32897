@@ -50,6 +50,11 @@ RSpec.describe FormObj, type: :model do
         @form_obj.valid?
         expect(@form_obj.errors.full_messages).to include("Phone number can't be blank")
       end
+      it '電話番号が全角数字だと登録できない' do
+        @form_obj.phone_number = '１２３４５６７８９'
+        @form_obj.valid?
+        expect(@form_obj.errors.full_messages).to include("Phone number is invalid")
+      end
       it '電話番号にハイフンなしでなければ購入できない' do
         @form_obj.phone_number = '-'
         @form_obj.valid?

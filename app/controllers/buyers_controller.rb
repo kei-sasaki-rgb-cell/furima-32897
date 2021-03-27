@@ -1,10 +1,10 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :redirect_to_root_path, only: [:index, :create]
 
   def index
     @form_obj = FormObj.new
-    redirect_to root_path if (current_user == @item.user) || @item.buyer.present?
   end
 
   def create
@@ -37,6 +37,10 @@ class BuyersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def redirect_to_root_path
+    redirect_to root_path if (current_user == @item.user) || @item.buyer.present?
   end
 
 end
